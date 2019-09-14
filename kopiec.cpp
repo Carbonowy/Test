@@ -40,16 +40,17 @@ bool szukaj(int i, int* tab, int pocz, int kon)
     
     if(pocz>=kon) return false;
 
-    if(tab[center] == i)
+    if(tab[center] == i) return true;
 
     if(i > tab[center]) szukaj(i,tab,center+1, kon);
         else szukaj(i,tab,pocz,center);
 
-    return true;
+    
 }
+
 void wypelnij1(int* tab, int spacja)
 {
-    tab[0]= 0;
+    tab[0] = 0;
     for(int i=1; i<spacja; i++)
     {
         tab[i] = (tab[i-1]*2)+1;
@@ -70,16 +71,18 @@ int main()
     int center = (pocz+kon)/2;
     wypelnij1(tablica_spacji, spacja);
    
-    for(int i=0; i<n; i++)
+    for(int i = 0; i < n; i++ )
     {
-        if( szukaj(i, tablica_spacji, pocz,kon) == true)
+        if(szukaj(i, tablica_spacji,pocz, kon) == true )
         {
-            for(int j=0; j<spacja; j++){ cout<<" "; spacja--;}
+            cout<<endl;
+            for(int j = 0; j<spacja; j++) cout<<" ";
             cout<<tab[i]<<" ";
+            spacja--;
         }
-        else cout<<tab[i]<<" ";      
+        else cout<<tab[i]<<" ";
     }
-
+    cout<<endl;
 
     return 0;
 }
