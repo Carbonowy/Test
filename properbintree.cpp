@@ -70,7 +70,7 @@ int main()
     int center = (pocz+kon)/2;
     wypelnij1(tablica_spacji, spacja);
    
-    cout<<spacja<<endl;
+    cout<<spacja<<endl<<" ";
 
     return 0;
 }

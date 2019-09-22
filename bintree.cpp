@@ -128,6 +128,8 @@ int main()
     drzewo(n, cone);
     
     wypisz(n,cone);
+
+	cout<<endl;
    
     return 0;
 }
