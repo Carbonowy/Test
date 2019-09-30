@@ -44,6 +44,7 @@ void fill_up_with_Es_coordinates(int tab[][2], int m)
 void sort_tab(int tab[][2], int n)
 {
    
+   
     int k = 1, schowek; 
     
     for( int i=k; i<n ; i++ )
@@ -64,6 +65,22 @@ void sort_tab(int tab[][2], int n)
     }
 
     k = 1;
+
+    for( int i=k; i<n ; i++ )
+    {
+        if(tab[k][1]<tab[k-1][1] && tab[k][0] == tab[k-1][0])
+        {
+            schowek = tab[k][1];
+            for( int j = k-1; j >= 0; j-- )
+            {
+                if( schowek < tab[j][1] && tab[j][0] == tab[j+1][0])
+                {
+                    swap(tab[j+1][1], tab[j][1]);
+                }
+            }
+        }
+        k++;
+    }
     
 }
 
@@ -88,15 +105,18 @@ void graff(vertex* head, int tab[][2])
     a = head; 
     tmp = head;
     int cubby;
+    
 
     int i = 0;
+    
     while( a -> next != NULL)
     {
+        
         while(tab[i][0] == a -> nr)
         {
             cubby = tab[i][1];
             
-            tmp = znajdz(cubby, head);
+            tmp = znajdz(cubby, tmp);
 
             switch(a -> Vertexcounter)
             {
@@ -108,8 +128,10 @@ void graff(vertex* head, int tab[][2])
             i++;
         }
         a = a -> next;
+        tmp = head;
     }
 }
+
 
 int main()
 {
@@ -123,9 +145,10 @@ int main()
     vertex* head;
     head = lista(amount_of_V);
 
-    graff(head,tab);
+    graff(head, tab);
 
-    cout<<head -> edge1 -> edge2 -> nr;
+ 
+    cout<<head->edge1->edge2->nr;
     
 
     return 0;
