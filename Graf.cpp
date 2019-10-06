@@ -139,15 +139,14 @@ vertex* find_Vertex(int Smthg, edge* head, int edgeamount,vertex* t1, vertex* t2
 edge* findedge(int S_V, int E_V, int edgeamount, edge* head_E)
 {
     edge* e = head_E;
-    bool b = false;
-
     edge* pom;
+    edge* tmp;
 
     for(int i=0; i<edgeamount; i++)
     {
-        if( e -> Vertex0 -> nr == S_V && e ->Vertex1-> nr == E_V ) { b = true;  break; }
-        else if(e -> Vertex0 -> nr == E_V && e ->Vertex1-> nr == S_V){ b = true; break; }
-        
+        if( e->next -> Vertex0 -> nr == S_V && e-> next ->Vertex1-> nr == E_V ) break; 
+        else if(e->next -> Vertex0 -> nr == E_V && e->next ->Vertex1-> nr == S_V)   break; 
+
         e = e->next;
     }
 
@@ -156,8 +155,12 @@ edge* findedge(int S_V, int E_V, int edgeamount, edge* head_E)
         pom = e->next;
         delete e;
     }
-    else delete e;
-        
+    else 
+    {   
+        tmp = e -> next;
+        e -> next = e -> next -> next;
+        delete tmp;
+    }    
     return pom;
 }
 edge* graf()
